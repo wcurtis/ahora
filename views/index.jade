@@ -1,0 +1,15 @@
+!!! 5
+html(lang="en")
+  head
+    title nodeFeed
+    link(rel="stylesheet", type="text/css", href="/main.css")
+    script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js")
+    script(type="text/javascript", src="/socket.io/socket.io.js")
+    script(type="text/javascript", src="/ahora.js")
+  body
+    #heading
+      h1 Ahora.io
+    #footer
+      p 
+        span#client_count 0
+        |  connected clients
