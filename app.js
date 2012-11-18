@@ -4,6 +4,12 @@ var app = express()
   , server = http.createServer(app)
   , io = require('socket.io').listen(server);
 
+// Configure socket.io for long polling because heroku doesn't support WebSockets yet :(
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+
 var buffer = new Array();
 
 require('jade');
