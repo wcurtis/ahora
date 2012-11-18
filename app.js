@@ -25,6 +25,16 @@ app.get('/', function(req, res){
   res.render('index');	
 });
 
+app.post('/song/:path', function(req, res){
+  if(req.params.path){
+    // Send url for all sockets to play
+    io.sockets.json.send({song:req.params.path}); 
+    res.send('Got it: ' + req.params.path, 200) 
+  }else{
+    res.send('No dice. Make sure you url encode your path string', 403)
+  }
+});
+
 var activeClients = 0;
 
 function clientDisconnect(client){
