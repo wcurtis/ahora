@@ -22,7 +22,8 @@ app.get('/*.(js|css)', function(req, res){
 });
 
 app.get('/', function(req, res){
-  res.render('index');	
+  // Render raw html instead of jade for now
+  res.sendfile('views/index.html');	
 });
 
 app.post('/song/:path', function(req, res){
