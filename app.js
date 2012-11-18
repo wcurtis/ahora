@@ -32,4 +32,5 @@ io.sockets.on('connection', function(client){
   client.on('disconnect', function(){clientDisconnect(client)});
 }); 
 
-server.listen(3000)
+var port = process.env.PORT || 5000;
+server.listen(port);
