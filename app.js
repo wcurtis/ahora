@@ -26,6 +26,11 @@ app.get('/', function(req, res){
   res.sendfile('views/index.html');	
 });
 
+app.post('/', function(req, res){
+  // Play default song
+  io.sockets.json.send({song:"http://billcurtis.ca/public/sail.mp3"});
+});
+
 app.post('/song/:path', function(req, res){
   if(req.params.path){
     // Send url for all sockets to play
