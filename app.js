@@ -23,9 +23,14 @@ app.get('/*.(js|css)', function(req, res){
   res.sendfile("./public"+req.url);
 });
 
+app.get('/audio/:key', function(req, res){
+  // Render raw html instead of jade for now
+  res.render('song', {media: req.params.key}); 
+});
+
 app.get('/', function(req, res){
   // Render raw html instead of jade for now
-  res.sendfile('views/index.html');	
+  res.render('index');	
 });
 
 app.post('/', function(req, res){
