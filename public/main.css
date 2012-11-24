@@ -1,11 +1,14 @@
 h1 {
-    font-family: 'Sansita One', cursive;
-    color: white;
+    font-family: 'Germania One', cursive;
+    color: black;
     text-align: center;
     font-size: 60px;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     margin-top: 80px;
     margin-bottom: 10px;
+}
+
+h1 dat {
+    color: #C01212;
 }
 
 body {
