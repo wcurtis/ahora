@@ -79,6 +79,21 @@ app.get('/audio/:key', function(req, res){
   
 });
 
+/**
+ * Send audio action to all connected browsers on this
+ * page.
+ */
+app.post('/audio/:key', function(req, res) {
+  Page.findOne({ key: req.params.key}, function(err, page) {
+    if (page) {
+      io.sockets.json.send({song: page.media});
+      res.send(200);
+      return;
+    }
+    res.send(404); 
+  });
+});
+
 app.get('/', function(req, res){
   // Render raw html instead of jade for now
   res.render('index');	
