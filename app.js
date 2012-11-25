@@ -92,7 +92,8 @@ app.get('/audio/:key', function(req, res){
 app.post('/audio/:key', function(req, res) {
   Page.findOne({ key: req.params.key}, function(err, page) {
     if (page) {
-      io.sockets.json.send({song: page.media});
+      io.sockets.in(req.params.key).emit('message', {song: page.media});
+      // io.sockets.json.send({song: page.media});
       res.send(200);
       return;
     }
@@ -117,13 +118,13 @@ function clientDisconnect(client){
   io.sockets.json.send({clients:activeClients})
 }
 
-io.sockets.on('connection', function(client){ 
-  console.log("Connectin: " + Object.keys(client))
+io.sockets.on('connection', function(socket){ 
   activeClients +=1;
   io.sockets.json.send({clients:activeClients})
-  client.on('disconnect', function(){clientDisconnect(client)});
-  client.on('pageKey', function(data) {
-    console.log("pageKey: " + data.key);
+  socket.on('disconnect', function(){clientDisconnect(socket)});
+  socket.on('subscribe', function(data) {
+    socket.join(data.key);
+    console.log("Joined room " + data.key + ". Total: " + io.sockets.clients(data.key));
   });
 }); 
 

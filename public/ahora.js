@@ -15,7 +15,7 @@ $(document).ready(function () {
 
   var socket = io.connect();
   socket.on('connect', function() {
-    socket.emit('pageKey', {key:dw_key});
+    socket.emit('subscribe', {key:dw_key});
     console.log('connectedddd');
   })
   socket.on('message', function(msg){msgReceived(msg)});
