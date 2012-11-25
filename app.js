@@ -40,7 +40,8 @@ pageSchema.methods.log = function () {
 }
 
 var Page = db.model('Page', pageSchema);
-var defaultAudio = "http://billcurtis.ca/public/sail.mp3";
+var audioSail = "http://billcurtis.ca/public/sail.mp3";
+var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet.mp3";
 
 //js+css files
 app.get('/*.(js|css)', function(req, res){
@@ -51,9 +52,16 @@ app.get('/audio/create/:key', function(req, res){
   var newPage = new Page({
     key: req.params.key,
     type: 'audio',
-    media: defaultAudio,
+    media: audioSail,
     label: 'Sale - Awolnation'
   })
+
+  // Create a different audio track if the key is not numeric
+  if (isNaN(req.params.key)) {
+    newPage.media = audioScapegoat;
+    newPage.label = "Shieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet";
+  }
+
   newPage.save(function (err, fluffy) {
     if (err) {
       console.log("Error")
@@ -108,7 +116,7 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
   // Play default song
-  io.sockets.json.send({song: defaultAudio});
+  io.sockets.json.send({song: audioSail});
 });
 
 var activeClients = 0;
