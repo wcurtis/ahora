@@ -14,5 +14,9 @@ $(document).ready(function () {
   $clientCounter = $("#client_count")
 
   var socket = io.connect();
+  socket.on('connect', function() {
+    socket.emit('pageKey', {key:dw_key});
+    console.log('connectedddd');
+  })
   socket.on('message', function(msg){msgReceived(msg)});
 });

@@ -60,7 +60,10 @@ app.get('/audio/create/:key', function(req, res){
     }
     console.log("Saved it")
   });
-  res.render('song', {media: req.params.key});
+  res.render('song', {
+    media: 'Created ' + req.params.key,
+    key: req.params.key
+  }); 
 });
 
 /**
@@ -71,7 +74,10 @@ app.get('/audio/:key', function(req, res){
 
   Page.findOne({ key: req.params.key}, function(err, page) {
     if (page) {
-      res.render('song', {media: page.label}); 
+      res.render('song', {
+        media: page.label,
+        key: req.params.key
+      }); 
       return;
     }
     res.send(404); 
@@ -112,9 +118,13 @@ function clientDisconnect(client){
 }
 
 io.sockets.on('connection', function(client){ 
+  console.log("Connectin: " + Object.keys(client))
   activeClients +=1;
   io.sockets.json.send({clients:activeClients})
   client.on('disconnect', function(){clientDisconnect(client)});
+  client.on('pageKey', function(data) {
+    console.log("pageKey: " + data.key);
+  });
 }); 
 
 var port = process.env.PORT || 5000;
