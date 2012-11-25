@@ -17,3 +17,11 @@ html(lang="en")
       footer
         span#client_count 0
         |  connected clients
+      p
+        a(class='button', href='/audio/new') + New Document
+      #newPage
+        form(method='post', action='/audio')
+        input(name='document[id]', value=4, type='hidden')
+        input(name='_method', value='PUT', type='hidden')
+        input(name='document[title]', value='new')
+        

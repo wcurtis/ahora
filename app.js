@@ -74,6 +74,14 @@ app.get('/audio/create/:key', function(req, res){
   }); 
 });
 
+app.get('/audio/new', function(req, res) {
+
+  page = createAudioPage();
+  page.save();
+
+  res.redirect('/audio/' + page.key);
+});
+
 /**
  * Render an audio page if it exists in the db,
  * otherwise 404.
@@ -92,6 +100,23 @@ app.get('/audio/:key', function(req, res){
   });
   
 });
+
+
+
+function createAudioPage()
+{
+  return new Page({
+    key: getRandKey(),
+    type: 'audio',
+    media: audioSail,
+    label: 'Sale - Awolnation'
+  })
+}
+
+function getRandKey()
+{
+  return Math.random().toString(36).substring(7);
+}
 
 /**
  * Send audio action to all connected browsers on this
