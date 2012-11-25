@@ -6,7 +6,6 @@ html(lang="en")
     link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato|Sansita+One|Germania+One")
     script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js")
     script(type="text/javascript", src="/socket.io/socket.io.js")
-    script(type="text/javascript", src="/ahora.js")
   body
     #wrapper
       header
@@ -14,14 +13,5 @@ html(lang="en")
           span
             dat dat
             | webhook
-      footer
-        span#client_count 0
-        |  connected clients
       p
-        a(class='button', href='/audio/new') + New Document
-      #newPage
-        form(method='post', action='/audio')
-        input(name='document[id]', value=4, type='hidden')
-        input(name='_method', value='PUT', type='hidden')
-        input(name='document[title]', value='new')
-        
+        a(class='newpage', href='/audio/new') + New Hook

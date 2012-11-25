@@ -109,7 +109,7 @@ function createAudioPage()
     key: getRandKey(),
     type: 'audio',
     media: audioSail,
-    label: 'Sale - Awolnation'
+    label: 'Sail - Awolnation'
   })
 }
 
