@@ -5,11 +5,24 @@ html
         title= title + " | datwebhook.com"
     else
         title datwebhook.com
+    link(rel='stylesheet', href='/css/bootstrap.css')
     link(rel='stylesheet', href='/css/style.css')
     link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato|Sansita+One|Germania+One")
     script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js")
+    script(type="text/javascript", src="/js/bootstrap.js")
     script(type="text/javascript", src="/socket.io/socket.io.js")
     script(type="text/javascript", src="/js/ahora.js")
     block headAfter
   body
+    header
+      .navbar.navbar-inverse
+        .navbar-inner
+          .brand(href="#") datwebhook
+          ul.nav
+            li.active
+              a(href="#") Home
+            li
+              a(href="#") How it works
+            li
+              a(href="#") Pricing
     block content

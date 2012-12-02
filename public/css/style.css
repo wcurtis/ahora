@@ -11,6 +11,10 @@ h1 dat {
     color: #C01212;
 }
 
+#button_newhook {
+    margin-top: 20px;
+}
+
 body {
     font-family: 'Lato', cursive;
     text-align: center;
