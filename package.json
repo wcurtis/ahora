@@ -6,7 +6,8 @@
     "socket.io": "0.9.x",
     "jade": "0.27.x",
     "mongodb" : "1.1.x",
-    "mongoose" : "3.4.x"
+    "mongoose" : "3.4.x",
+    "async": "latest"
   },
   "engines": {
     "node": "0.8.x",

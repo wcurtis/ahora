@@ -1,17 +1,15 @@
-!!! 5
-html(lang="en")
+doctype 5
+html
   head
-    title datwebhook.com
-    link(rel="stylesheet", type="text/css", href="/main.css")
+    if locals.title
+        title= title + " | datwebhook.com"
+    else
+        title datwebhook.com
+    link(rel='stylesheet', href='/css/style.css')
     link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato|Sansita+One|Germania+One")
     script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js")
     script(type="text/javascript", src="/socket.io/socket.io.js")
+    script(type="text/javascript", src="/js/ahora.js")
+    block headAfter
   body
-    #wrapper
-      header
-        h1
-          span
-            dat dat
-            | webhook
-      p
-        a(class='newpage', href='/audio/new') + Create a New Hook
+    block content
