@@ -1,14 +1,10 @@
 extends layout
 
 block content
-  #wrapper
-    header
-      .hero-unit
-        h1
-          span
-            dat dat
-            | webhook
-        p Listen to your webhooks
-        p
-          a#button_newhook.btn.btn-large(href="/audio/new") +  Create a New Hook
-    //a#button_newhook.btn.btn-largeCreate a New Hook
+  .hero-unit
+    #logo
+      span#dat dat
+      | webhook
+    p Listen to your webhooks
+    p
+      a#button_newhook.btn.btn-large(href="/audio/new") +  Create a New Hook
