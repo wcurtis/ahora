@@ -15,6 +15,10 @@ h1 dat {
     margin-top: 20px;
 }
 
+#createdby {
+    color: #333;
+}
+
 body {
     font-family: 'Lato', cursive;
     text-align: center;
