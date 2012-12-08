@@ -2,9 +2,9 @@
     font-family: 'Germania One', cursive;
     color: black;
     text-align: center;
-    font-size: 60px;
+    font-size: 68px;
     font-weight: bold;
-    margin-top: 80px;
+    margin-top: 70px;
     margin-bottom: 10px;
 }
 
@@ -12,18 +12,39 @@
     color: #C01212;
 }
 
+#tagline {
+	margin-top: 20px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    opacity: 0.5;
+}
+
 #button_newhook {
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 #createdby {
-    color: #333;
+    color: white;
+    opacity: 0.3;
 }
 
 #navbar-wrap {
     max-width:981px;
     margin: 0 auto;
 }​
+
+/* Why does this need to be here in order for my .navbar style to apply? Crazy css. */
+.navbar-inverse {
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.btn-primary {
+    opacity: 0.9;
+}
 
 .hero-unit p {
     text-align: center;
@@ -32,6 +53,15 @@
 body {
     font-family: 'Lato', cursive;
     text-align: center;
+}
+
+.navbar-fixed-bottom {
+    color: #9C9C9C;
+}
+
+#footer-text {
+    text-align: center;
+    margin-top: 10px;
 }
 
 /* Cool off-white backgroung, maybe for later
