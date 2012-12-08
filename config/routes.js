@@ -9,8 +9,8 @@ module.exports = function (app) {
 
   // article routes
   var page = require('../app/controllers/page')
-  app.get('/audio/new', page.create)
-  app.get('/audio/:id', page.show)
+  app.get('/h/new', page.create)
+  app.get('/h/:id', page.show)
   app.post('/', page.pingall)
-  app.post('/audio/:id', page.ping)
+  app.post('/h/:id', page.ping)
 }

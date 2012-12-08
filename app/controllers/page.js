@@ -26,7 +26,7 @@ exports.create = function(req, res) {
   page = createAudioPage();
   page.save();
 
-  res.redirect('/audio/' + page.key);
+  res.redirect('/h/' + page.key);
 };
 
 exports.ping = function(req, res) {
