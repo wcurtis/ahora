@@ -64,6 +64,22 @@ body {
     margin-top: 10px;
 }
 
+/* Page */
+
+#url-bar {
+    margin-top: 20px;
+    /*background-color: #D3D3D3;*/
+    /*display: inline-block;*/
+}
+
+#url-well {
+    font-size: 20px;
+}
+
+.well {
+    box-sizing: border-box;
+}
+
 /* Cool off-white backgroung, maybe for later
 html, body {
   background: #f4f5f5 url(/public/img/bg.png) no-repeat center 0;

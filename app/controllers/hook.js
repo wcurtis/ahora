@@ -12,9 +12,10 @@ var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeee
 exports.show = function(req, res) {
   Page.findOne({ key: req.params.id}, function(err, page) {
     if (page) {
-      res.render('song', {
+      res.render('page', {
         media: page.label,
-        key: req.params.id
+        key: req.params.id,
+        hook_url: 'http://' + req.host + req.path
       }); 
       return;
     }

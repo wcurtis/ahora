@@ -1,0 +1,11 @@
+extends layout
+
+block headAfter
+  script(type="text/javascript", src="/js/hook.js")
+  script(type="text/javascript", src="/js/ahora.js")
+  script(type="text/javascript", src="/js/jquery.zclip.js")
+
+block content
+  .hook-container
+    include page/url
+    hr

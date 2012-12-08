@@ -15,8 +15,10 @@ $(document).ready(function () {
 
   var socket = io.connect();
   socket.on('connect', function() {
-    socket.emit('subscribe', {key:dw_key});
-    console.log('connectedddd');
+    if (typeof dw_key !== 'undefined') {
+      socket.emit('subscribe', {key:dw_key});
+    }
+    console.log('Connected to socket.io');
   })
   socket.on('message', function(msg){msgReceived(msg)});
 });
