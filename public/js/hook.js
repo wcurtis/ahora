@@ -23,4 +23,21 @@ $(document).ready(function () {
     });
   });
 
+  // bind 'myForm' and provide a simple callback function 
+  $('#audio-form').ajaxForm({
+      type:     'POST',
+      url:      '/hook/' + hook_key,
+      dataType: 'json',
+      beforeSubmit: function(arr, $form, options) { 
+        // The array of form data takes the following form: 
+        // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ] 
+        // return false to cancel submit                  
+      },
+      error: function() {
+        console.log("Failed");
+      },
+      success: function(responseText, statusText, xhr, $form) { 
+        console.log("Saved " + responseText); 
+  }}); 
+
 });

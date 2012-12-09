@@ -2,61 +2,39 @@
 var mongoose = require('mongoose')
   , Page = mongoose.model('Page')
 
-// TODO: There's gotta be a cleaner way to access the io socket
-var io = require('../../app').io;
-
 var audioSail = "http://billcurtis.ca/public/sail.mp3";
-var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet.mp3";
 
-
-exports.show = function(req, res) {
+exports.get = function(req, res) {
+  // Find the item and return it
   Page.findOne({ key: req.params.id}, function(err, page) {
-    if (page) {
-
-      // Only show port in url if not port 80
-      var hookPort = '';
-      if (server.address().port != 80) {
-        hookPort = ':' + server.address().port;
-      }
-
-      res.render('page', {
-        media: page.label,
-        key: req.params.id,
-        hook_key: req.params.id,
-        hook_url: 'http://' + req.host + hookPort + req.path
-      }); 
-      return;
-    }
-    res.send(404); 
+    if (err)   res.json(500, {'error': err.message})
+    if (!page) res.json(404, {'error': 'Hook not found'}); 
+    res.json(page);
   });
 };
 
 exports.create = function(req, res) {
   page = createAudioPage();
   page.save();
-
-  res.redirect('/h/' + page.key);
+  res.json(201, page);
 };
 
-/* Will enable once rooms are working again in socket.io
-exports.ping = function(req, res) {
+exports.update = function(req, res) {
   Page.findOne({ key: req.params.id}, function(err, page) {
-    if (page) {
-      io.sockets.in(req.params.id).emit('message', {song: page.media});
-      // io.sockets.json.send({song: page.media});
-      res.send(200);
-      return;
+    if (err)   res.json(500, {'error': err.message})
+    if (!page) res.json(404, {'error': 'Hook not found'}); 
+
+    for (var key in req.body) {
+      page[key] = req.body[key];
     }
-    res.send(404); 
+    page.save(function(err) {
+      if (err)   res.json(500, {'error': err.message});
+      res.json(page);
+    })
   });
 };
-*/
 
-exports.ping = function(req, res) {
-  io.sockets.json.send({song: audioSail});
-  res.send(200);
-};
-
+// TODO: Move this so it's a method of the Page model
 function createAudioPage()
 {
   return new Page({

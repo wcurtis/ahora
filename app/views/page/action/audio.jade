@@ -1,10 +1,10 @@
 
 .row
-  #url-bar.span10.offset1
-    .row
-      .span2
-        .pull-right
-          #btn-post.btn POST
-      .span6#url-well.well= hook_url
-      .span2
-        #btn-copy.btn.btn-primary.pull-left Copy
+  .span10
+    form#audio-form.form-inline
+      .input-prepend.input-append
+        span.add-on
+          i.icon-bullhorn
+        input.input-small.span6(type="text", name="audio_url", placeholder="http://billcurtis.ca/public/sail.mp3")
+        input.btn(type="submit") Savasdfe
+

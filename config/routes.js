@@ -8,10 +8,18 @@ module.exports = function (app) {
   app.get('/', index.index)
 
   // article routes
+  var h = require('../app/controllers/page')
+  app.get('/h/new', h.create)
+  app.get('/h/:id', h.show)
+  app.post('/h/:id', h.ping)
+
+  // hook resource
   var hook = require('../app/controllers/hook')
-  app.get('/h/new', hook.create)
-  app.get('/h/:id', hook.show)
-  app.post('/h/:id', hook.ping)
+  app.post('/hook', hook.create)
+  app.post('/hook/:id', hook.update)
+  app.get('/hook/:id', hook.get)
+  app.post('/hook/:id/delete', hook.delete)
+
 
   // Disabled this for now because something keeps pinging us!
   // app.post('/', hook.pingall)
