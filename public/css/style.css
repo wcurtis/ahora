@@ -84,6 +84,10 @@ body {
     box-sizing: border-box;
 }
 
+#url-bar .btn {
+    margin-top: 15px;
+}
+
 /* Cool off-white backgroung, maybe for later
 html, body {
   background: #f4f5f5 url(/public/img/bg.png) no-repeat center 0;
