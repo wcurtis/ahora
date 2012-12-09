@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose')
-  , Page = mongoose.model('Page')
+  , Hook = mongoose.model('Hook')
 
 // TODO: There's gotta be a cleaner way to access the io socket
 var io = require('../../app').io;
@@ -10,8 +10,8 @@ var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeee
 
 
 exports.show = function(req, res) {
-  Page.findOne({ key: req.params.id}, function(err, page) {
-    if (page) {
+  Hook.findOne({ key: req.params.id}, function(err, hook) {
+    if (hook) {
 
       // Only show port in url if not port 80
       var hookPort = '';
@@ -20,11 +20,11 @@ exports.show = function(req, res) {
       }
 
       res.render('page', {
-        media: page.label,
+        media: hook.label,
         key: req.params.id,
         hook_key: req.params.id,
         hook_url: 'http://' + req.host + hookPort + req.path,
-        media_url: page.media
+        media_url: hook.media
       }); 
       return;
     }
@@ -34,10 +34,10 @@ exports.show = function(req, res) {
 
 /* Will enable once rooms are working again in socket.io
 exports.ping = function(req, res) {
-  Page.findOne({ key: req.params.id}, function(err, page) {
-    if (page) {
-      io.sockets.in(req.params.id).emit('message', {song: page.media});
-      // io.sockets.json.send({song: page.media});
+  Hook.findOne({ key: req.params.id}, function(err, hook) {
+    if (hook) {
+      io.sockets.in(req.params.id).emit('message', {song: hook.media});
+      // io.sockets.json.send({song: hook.media});
       res.send(200);
       return;
     }

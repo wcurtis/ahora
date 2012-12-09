@@ -3,7 +3,7 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
 
-var PageSchema = new Schema({
+var HookSchema = new Schema({
     type: String
   , key: {type: String, index: {unique: true, dropDups: true}}
   , media: String
@@ -11,12 +11,12 @@ var PageSchema = new Schema({
   , createdAt  : {type : Date, default : Date.now}
 })
 
-PageSchema.methods.log = function () {
-    console.log("Page: " + this);
+HookSchema.methods.log = function () {
+    console.log("Hook: " + this);
 }
 
-PageSchema.path('media').validate(function (media) {
+HookSchema.path('media').validate(function (media) {
   return media.length > 0
 }, 'Hook media cannot be blank')
 
-mongoose.model('Page', PageSchema)
+mongoose.model('Hook', HookSchema)

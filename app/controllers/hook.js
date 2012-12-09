@@ -1,49 +1,49 @@
 
 var mongoose = require('mongoose')
-  , Page = mongoose.model('Page')
+  , Hook = mongoose.model('Hook')
 
 var audioSail = "http://billcurtis.ca/public/sail.mp3";
 
 exports.get = function(req, res) {
   // Find the item and return it
-  Page.findOne({ key: req.params.id}, function(err, page) {
+  Hook.findOne({ key: req.params.id}, function(err, hook) {
     if (err)   res.json(500, {'error': err.message})
-    if (!page) res.json(404, {'error': 'Hook not found'}); 
-    res.json(page);
+    if (!hook) res.json(404, {'error': 'Hook not found'}); 
+    res.json(hook);
   });
 };
 
 exports.create = function(req, res) {
-  page = createAudioPage();
-  page.save();
-  res.json(201, page);
+  hook = createAudioHook();
+  hook.save();
+  res.json(201, hook);
 };
 
 exports.update = function(req, res) {
-  Page.findOne({ key: req.params.id}, function(err, page) {
+  Hook.findOne({ key: req.params.id}, function(err, hook) {
     if (err)   res.json(500, {'error': err.message})
-    if (!page) res.json(404, {'error': 'Hook not found'}); 
+    if (!hook) res.json(404, {'error': 'Hook not found'}); 
 
     for (var key in req.body) {
-      page[key] = req.body[key];
+      hook[key] = req.body[key];
     }
-    page.save(function(err) {
+    hook.save(function(err) {
       if (err)   res.json(500, {'error': err.message});
-      res.json(page);
+      res.json(hook);
     })
   });
 };
 
 exports.createDefault = function(req, res) {
-  page = createAudioPage();
-  page.save();
-  res.redirect('/h/' + page.key);
+  hook = createAudioHook();
+  hook.save();
+  res.redirect('/h/' + hook.key);
 };
 
-// TODO: Move this so it's a method of the Page model
-function createAudioPage()
+// TODO: Move this so it's a method of the Hook model
+function createAudioHook()
 {
-  return new Page({
+  return new Hook({
     key: getRandKey(),
     type: 'audio',
     media: audioSail,
