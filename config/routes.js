@@ -16,6 +16,7 @@ module.exports = function (app) {
   // hook resource
   var hook = require('../app/controllers/hook')
   app.post('/hook', hook.create)
+  app.get('/hook/new', hook.createDefault)
   app.post('/hook/:id', hook.update)
   app.get('/hook/:id', hook.get)
   app.post('/hook/:id/delete', hook.delete)

@@ -34,6 +34,12 @@ exports.update = function(req, res) {
   });
 };
 
+exports.createDefault = function(req, res) {
+  page = createAudioPage();
+  page.save();
+  res.redirect('/h/' + page.key);
+};
+
 // TODO: Move this so it's a method of the Page model
 function createAudioPage()
 {

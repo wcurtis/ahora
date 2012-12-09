@@ -32,13 +32,6 @@ exports.show = function(req, res) {
   });
 };
 
-exports.create = function(req, res) {
-  page = createAudioPage();
-  page.save();
-
-  res.redirect('/h/' + page.key);
-};
-
 /* Will enable once rooms are working again in socket.io
 exports.ping = function(req, res) {
   Page.findOne({ key: req.params.id}, function(err, page) {
@@ -57,18 +50,3 @@ exports.ping = function(req, res) {
   io.sockets.json.send({song: audioSail});
   res.send(200);
 };
-
-function createAudioPage()
-{
-  return new Page({
-    key: getRandKey(),
-    type: 'audio',
-    media: audioSail,
-    label: 'Sail - Awolnation'
-  })
-}
-
-function getRandKey()
-{
-  return Math.random().toString(36).substring(7);
-}
