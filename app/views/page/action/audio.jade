@@ -3,8 +3,8 @@
   .span10
     form#audio-form.form-inline
       .input-prepend.input-append
-        span.btn.add-on
+        span#btn-preview.btn.add-on
           i.icon-bullhorn
-        input.input-small.span6(type="text", name="media", placeholder="http://billcurtis.ca/public/sail.mp3", value="#{media_url}")
-        input.btn(type="submit") Savasdfe
+        input#media-url.input-small.span6(type="text", name="media", placeholder="http://billcurtis.ca/public/sail.mp3", value="#{media_url}")
+        input#btn-save-media.btn(type="submit", value="Save", data-loading-text="Saving...", disabled="disabled")
 
