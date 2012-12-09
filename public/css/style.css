@@ -46,6 +46,10 @@
     opacity: 0.9;
 }
 
+.hero-unit {
+    background-color: white;
+}
+
 .hero-unit p {
     text-align: center;
 }

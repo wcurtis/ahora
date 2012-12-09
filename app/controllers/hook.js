@@ -12,10 +12,18 @@ var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeee
 exports.show = function(req, res) {
   Page.findOne({ key: req.params.id}, function(err, page) {
     if (page) {
+
+      // Only show port in url if not port 80
+      var hookPort = '';
+      if (server.address().port != 80) {
+        hookPort = ':' + server.address().port;
+      }
+
       res.render('page', {
         media: page.label,
         key: req.params.id,
-        hook_url: 'http://' + req.host + req.path
+        hook_key: req.params.id,
+        hook_url: 'http://' + req.host + hookPort + req.path
       }); 
       return;
     }
@@ -30,6 +38,7 @@ exports.create = function(req, res) {
   res.redirect('/h/' + page.key);
 };
 
+/* Will enable once rooms are working again in socket.io
 exports.ping = function(req, res) {
   Page.findOne({ key: req.params.id}, function(err, page) {
     if (page) {
@@ -41,9 +50,11 @@ exports.ping = function(req, res) {
     res.send(404); 
   });
 };
+*/
 
 exports.ping = function(req, res) {
   io.sockets.json.send({song: audioSail});
+  res.send(200);
 };
 
 function createAudioPage()

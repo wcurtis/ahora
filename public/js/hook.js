@@ -14,4 +14,13 @@ $(document).ready(function () {
       }
   });
 
+  $('#btn-post').on('click', function() {
+
+    console.log('button press');
+    // POST to the url for this page
+    $.post(hook_key, function(data) {
+      console.log('yay');
+    });
+  });
+
 });

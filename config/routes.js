@@ -12,5 +12,7 @@ module.exports = function (app) {
   app.get('/h/new', hook.create)
   app.get('/h/:id', hook.show)
   app.post('/h/:id', hook.ping)
-  app.post('/', hook.pingall)
+
+  // Disabled this for now because something keeps pinging us!
+  // app.post('/', hook.pingall)
 }

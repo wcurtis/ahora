@@ -6,7 +6,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
-var app = express()
+app = express()
 app.configure(function(){
   app.set('port', process.env.PORT || 5000);
   app.set('views', __dirname + '/app/views');
@@ -32,7 +32,7 @@ model_files.forEach(function (file) {
 })
 
 // Bootstrap socket.io
-var server = http.createServer(app)
+server = http.createServer(app)
   , io = require('socket.io').listen(server);
 
 // Heroku doesn't support WebSockets but we can use them locally :)
