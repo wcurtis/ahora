@@ -59,7 +59,7 @@ $(document).ready(function () {
         console.log("Saved " + JSON.stringify(responseText)); 
   }}); 
 
-  function playAudio(url) {
+  playAudio = function (url) {
     var song = new Audio(url);
     song.play();
     doAudioAnimation();
