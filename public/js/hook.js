@@ -56,6 +56,7 @@ $(document).ready(function () {
         // Enable the save button
         $('#btn-preview').removeClass('disabled')
           .removeAttr('disabled');
+        $('#media-url').attr('value', responseText.action.media_url);
         console.log("Saved " + JSON.stringify(responseText)); 
   }}); 
 

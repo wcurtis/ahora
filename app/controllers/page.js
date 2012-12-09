@@ -12,7 +12,6 @@ var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeee
 exports.show = function(req, res) {
   Hook.findOne({ key: req.params.id}, function(err, hook) {
     if (hook) {
-
       // Only show port in url if not port 80
       var hookPort = '';
       if (server.address().port != 80) {
@@ -20,11 +19,11 @@ exports.show = function(req, res) {
       }
 
       res.render('page', {
-        media: hook.label,
         key: req.params.id,
         hook_key: req.params.id,
         hook_url: 'http://' + req.host + hookPort + req.path,
-        media_url: hook.media
+        hook_verb: hook.verb,
+        media_url: hook.action.media_url
       }); 
       return;
     }
