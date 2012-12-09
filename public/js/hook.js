@@ -25,9 +25,7 @@ $(document).ready(function () {
 
   $('#btn-preview').on('click', function() {
     var mediaUrl = $('#media-url').val();
-    var song = new Audio(mediaUrl);
-    song.play();
-    console.log('Playing song: ' + mediaUrl);
+    playAudio(mediaUrl);
   });
 
   $('#media-url').bind('keyup input paste', function() {
@@ -60,6 +58,33 @@ $(document).ready(function () {
           .removeAttr('disabled');
         console.log("Saved " + JSON.stringify(responseText)); 
   }}); 
+
+  function playAudio(url) {
+    var song = new Audio(url);
+    song.play();
+    doAudioAnimation();
+    console.log('Playing song: ' + url);
+  }
+
+
+  function doAudioAnimation() {
+
+    var element = $('#action-animation');
+    element.css('marginLeft', -1000)
+      .css('display', 'block');
+
+    element
+      .animate({
+        opacity: 1,
+        fontSize: "100px",
+        marginLeft: 50
+      }, 600, 'swing')
+      .delay(3000)
+      .animate({
+        opacity: 0,
+        marginLeft: 1000,
+      });
+  }
 
   $('.circle').transition({
     opacity: 0.2,
