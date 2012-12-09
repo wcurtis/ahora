@@ -61,4 +61,11 @@ $(document).ready(function () {
         console.log("Saved " + JSON.stringify(responseText)); 
   }}); 
 
+  $('.circle').transition({
+    opacity: 0.2,
+    "margin-top": "0px",
+    width: "120px",
+    height: "120px"
+  }, 1000);
+
 });

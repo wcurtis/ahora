@@ -103,6 +103,22 @@ body {
     margin-bottom: 20px;
 }
 
+#circle-container {
+    height: 200px;
+}
+
+.circle {
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-radius: 50%/50%; 
+    width: 20px;
+    height: 20px;
+    background: black;
+    opacity: 1;
+}
+
 /* Cool off-white backgroung, maybe for later
 html, body {
   background: #f4f5f5 url(/public/img/bg.png) no-repeat center 0;
