@@ -23,7 +23,8 @@ exports.show = function(req, res) {
         media: page.label,
         key: req.params.id,
         hook_key: req.params.id,
-        hook_url: 'http://' + req.host + hookPort + req.path
+        hook_url: 'http://' + req.host + hookPort + req.path,
+        media_url: page.media
       }); 
       return;
     }

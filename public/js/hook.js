@@ -29,15 +29,14 @@ $(document).ready(function () {
       url:      '/hook/' + hook_key,
       dataType: 'json',
       beforeSubmit: function(arr, $form, options) { 
-        // The array of form data takes the following form: 
-        // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ] 
-        // return false to cancel submit                  
+        console.log("Request " + $.param(arr)); 
+        return true;
       },
       error: function() {
         console.log("Failed");
       },
       success: function(responseText, statusText, xhr, $form) { 
-        console.log("Saved " + responseText); 
+        console.log("Saved " + JSON.stringify(responseText)); 
   }}); 
 
 });
