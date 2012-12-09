@@ -96,7 +96,7 @@ body {
 
 #action-choose-bar .text {
     margin-top: 50px;
-    font-size: 40px;
+    font-size: 42px;
 }
 
 #action-choose-bar .btn-group {
@@ -115,6 +115,10 @@ body {
     opacity: 0.2;
     display: none;
     color: 'red'; 
+}
+
+#audio-form {
+    margin-top: 20px;
 }
 
 .circle {
