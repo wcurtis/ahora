@@ -8,7 +8,7 @@
     margin-bottom: 10px;
 }
 
-#dat {
+.dat {
     color: #C01212;
 }
 
@@ -86,6 +86,21 @@ body {
 
 #url-bar .btn {
     margin-top: 15px;
+}
+
+/* Action */
+
+.action-container {
+    padding-top: 10px;
+}
+
+#action-choose-bar .text {
+    margin-top: 50px;
+    font-size: 40px;
+}
+
+#action-choose-bar .btn-group {
+    margin-bottom: 20px;
 }
 
 /* Cool off-white backgroung, maybe for later
