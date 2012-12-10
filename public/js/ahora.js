@@ -1,22 +1,25 @@
 
 function msgReceived(msg){
-  if(msg.clients) {
-    $clientCounter.html(msg.clients);
-  } else if (msg.song) {
+  if(msg.clientCount) {
+    $('#listener-count').html(msg.clientCount);
+  } 
+  if (msg.song) {
     // Function in hook.js
     playAudio(msg.song);
-  } else if (msg.hits) {
-    console.log('Hits: ' + msg.hits);
+  } 
+  if (msg.hits) {
+    $('#hit-count').html(msg.hits);
+  } 
+  if (msg.lastHit) {
+    $('#last-hit').html(msg.lastHit);
   }
 }
 
 $(document).ready(function () {
-  $clientCounter = $("#client_count")
-
   var socket = io.connect();
   socket.on('connect', function() {
-    if (typeof dw_key !== 'undefined') {
-      socket.emit('subscribe', {key:dw_key});
+    if (typeof hook_key !== 'undefined') {
+      socket.emit('subscribe', {key:hook_key});
     }
     console.log('Connected to socket.io');
   })

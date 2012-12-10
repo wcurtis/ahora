@@ -52,7 +52,28 @@ var activeClients = 0;
 
 function clientDisconnect(socket){
   activeClients -=1;
+  console.log(io.sockets.manager.roomClients[socket.id]);
+  notifyRoomsOfDisconnect(socket);
   io.sockets.json.send({clients:activeClients})
+}
+
+function notifyRoomsOfDisconnect(socket) {
+  var rooms = io.sockets.manager.roomClients[socket.id];
+  for (var room in rooms) {
+    if (room.charAt(0) == '/') {
+      var roomKey = room.substring(1);
+      var clients = io.sockets.clients(roomKey);
+      // We subtract one because this guy who's disconnecting is still in the count
+      var numClients = clients.length - 1;
+      io.sockets.in(roomKey).emit('message', {clientCount: numClients});
+    }
+  }
+}
+
+function updateRoomCount(roomKey) {
+  var clients = io.sockets.clients(roomKey);
+  io.sockets.in(roomKey).emit('message', {clientCount: clients.length});
+  console.log("Updating count for room " + roomKey + ". Total: " + clients.length);
 }
 
 io.sockets.on('connection', function(socket){ 
@@ -61,7 +82,12 @@ io.sockets.on('connection', function(socket){
   socket.on('disconnect', function(){clientDisconnect(socket)});
   socket.on('subscribe', function(data) {
     socket.join(data.key);
-    console.log("Joined room " + data.key + ". Total: " + io.sockets.clients(data.key));
+    updateRoomCount(data.key);
+
+    socket.on('unsubscribe', function(data) { 
+      socket.leave(data.key);
+      updateRoomCount(data.key);
+    });
   });
 }); 
 

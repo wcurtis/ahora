@@ -29,7 +29,7 @@
     opacity: 0.3;
 }
 
-#navbar-wrap {
+.navbar-wrap {
     max-width:981px;
     margin: 0 auto;
 }​
@@ -131,6 +131,12 @@ body {
     height: 20px;
     background: black;
     opacity: 1;
+}
+
+#footer-nav-container {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Cool off-white backgroung, maybe for later

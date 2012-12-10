@@ -17,7 +17,7 @@ html
     header
       .navbar.navbar-inverse
         .navbar-inner
-          #navbar-wrap
+          .navbar-wrap
             a.brand(href="/") datwebhook
             ul.nav.pull-right
               li
@@ -26,5 +26,6 @@ html
       block content
     .navbar.navbar-fixed-bottom
       .navbar-inner
-        #navbar-wrap 
-          #footer-text Que la fuerza te acompañe.
+        .navbar-wrap
+          #footer-nav-container
+            block footerNav

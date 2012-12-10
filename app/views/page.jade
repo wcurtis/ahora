@@ -18,3 +18,16 @@ block content
   .action-container
     include page/action
     hr
+
+block footerNav
+  ul#bottom-nav.nav
+    li
+      a Hits: 
+        span#hit-count= hit_count
+    li
+      a Last Hit: 
+        span#last-hit= last_hit
+    li
+      a Listeners: 
+        span#listener-count 2 
+  //#footer-text Que la fuerza te acompañe.

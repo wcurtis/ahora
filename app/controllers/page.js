@@ -24,7 +24,9 @@ exports.show = function(req, res) {
         hook_key: req.params.id,
         hook_url: 'http://' + req.host + hookPort + req.path,
         hook_verb: hook.verb,
-        media_url: hook.action.media_url
+        media_url: hook.action.media_url,
+        hit_count: '45',
+        last_hit: 'May 8',
       }); 
       return;
     }
@@ -63,6 +65,7 @@ exports.post = function(req, res) {
         io.sockets.json.send({hits: count});
         console.log('Total hits: ' + count);
       });
+      io.sockets.json.send({lastHit: hit.createdAt.toDateString()});
       // TODO: Change this to the real audio url
       io.sockets.json.send({song: audioSail});
     });
