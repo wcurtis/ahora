@@ -49,21 +49,10 @@ exports.show = function(req, res) {
   });
 };
 
-/* Will enable once rooms are working again in socket.io
-exports.ping = function(req, res) {
-  Hook.findOne({ key: req.params.id}, function(err, hook) {
-    if (hook) {
-      io.sockets.in(req.params.id).emit('message', {song: hook.media});
-      // io.sockets.json.send({song: hook.media});
-      res.send(200);
-      return;
-    }
-    res.send(404); 
-  });
-};
-*/
-
 exports.post = function(req, res) {
+
+  var hookKey = req.params.id;
+
   Hook.findOne({ key: req.params.id}, function(err, hook) {
     if (err)   { res.json(500, {'error': err.message}); return; }
     if (!hook) { res.json(404, {'error': 'Hook not found'}); return; } 
@@ -77,12 +66,12 @@ exports.post = function(req, res) {
 
     hit.save(function (err, docs) {
       Hit.count({_hookId: hook._id}, function(err, count) {
-        io.sockets.json.send({hits: count});
-        console.log('Total hits: ' + count);
+        io.sockets.in(hookKey).emit('message', {hits: count});
       });
-      io.sockets.json.send({lastHit: hit.createdAt.toDateString()});
+      io.sockets.in(hookKey).emit('message', {lastHit: hit.createdAt.toDateString()});
+
       // TODO: Change this to the real audio url
-      io.sockets.json.send({song: audioSail});
+      io.sockets.in(hookKey).emit('message', {song: audioSail});
     });
     
     res.send(200);
