@@ -11,7 +11,7 @@ module.exports = function (app) {
   var h = require('../app/controllers/page')
   app.get('/h/new', h.create)
   app.get('/h/:id', h.show)
-  app.post('/h/:id', h.ping)
+  app.post('/h/:id', h.post)
 
   // hook resource
   var hook = require('../app/controllers/hook')

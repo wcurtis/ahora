@@ -28,7 +28,10 @@ mongoose.connect(mongoUri)
 var models_path = __dirname + '/app/models'
   , model_files = fs.readdirSync(models_path)
 model_files.forEach(function (file) {
-  require(models_path+'/'+file)
+  // Ignore hidden files like .DS_Store
+  if (file.charAt(0) != '.') {
+    require(models_path+'/'+file)
+  }
 })
 
 // Bootstrap socket.io

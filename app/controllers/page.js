@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose')
   , Hook = mongoose.model('Hook')
+  , Hit = mongoose.model('Hit')
 
 // TODO: There's gotta be a cleaner way to access the io socket
 var io = require('../../app').io;
@@ -45,7 +46,20 @@ exports.ping = function(req, res) {
 };
 */
 
-exports.ping = function(req, res) {
-  io.sockets.json.send({song: audioSail});
-  res.send(200);
+exports.post = function(req, res) {
+  Hook.findOne({ key: req.params.id}, function(err, hook) {
+    if (err)   res.json(500, {'error': err.message})
+    if (!hook) res.json(404, {'error': 'Hook not found'}); 
+
+    hit = new Hit({
+      '_hookId': hook._id,
+      'verb': 'POST',
+      'body': req.body,
+      'params': req.params
+    });
+
+    hit.save();
+    io.sockets.json.send({song: audioSail});
+    res.send(200);
+  });
 };
