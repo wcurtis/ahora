@@ -12,4 +12,13 @@ var HitSchema = new Schema({
   , createdAt : {type : Date, default : Date.now}
 });
 
+HitSchema.statics.getCountByHookId = function (hookId, cb) {
+  this.count({ _hookId: hookId }, cb);
+}
+
+HitSchema.statics.getLastHitByHookId = function (hookId, cb) {
+  // this.find({ _hookId: hookId }, {sort: {createdAt: -1}, limit: 1}, cb);
+  this.find({_hookId: hookId}).sort('createdAt').limit(1).find(cb);
+}
+
 mongoose.model('Hit', HitSchema);

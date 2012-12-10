@@ -12,25 +12,40 @@ var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeee
 
 exports.show = function(req, res) {
   Hook.findOne({ key: req.params.id}, function(err, hook) {
-    if (hook) {
-      // Only show port in url if not port 80
-      var hookPort = '';
-      if (server.address().port != 80) {
-        hookPort = ':' + server.address().port;
-      }
+    if (err)   { res.json(500, {'error': err.message}); return; }
+    if (!hook) { res.json(404, {'error': 'Hook not found'}); return; } 
 
-      res.render('page', {
-        key: req.params.id,
-        hook_key: req.params.id,
-        hook_url: 'http://' + req.host + hookPort + req.path,
-        hook_verb: hook.verb,
-        media_url: hook.action.media_url,
-        hit_count: '45',
-        last_hit: 'May 8',
-      }); 
-      return;
+    // Only show port in url if not port 80
+    var hookPort = '';
+    if (server.address().port != 80) {
+      hookPort = ':' + server.address().port;
     }
-    res.send(404); 
+
+    Hit.getCountByHookId(hook._id, function(err, count) {
+      if (err)   { res.json(500, {'error': err.message}); return; }
+
+      Hit.getLastHitByHookId(hook._id, function(err, lastHit) {
+        if (err)   { res.json(500, {'error': err.message}); return; }
+
+          console.log('Last hit: ' + typeof lastHit[0]);
+
+        var lastHitDate = 'Never';
+        if (typeof lastHit[0] === 'object') {
+          lastHitDate = lastHit[0].createdAt.toDateString()
+        }
+
+        // Render the page
+        res.render('page', {
+          key: req.params.id,
+          hook_key: req.params.id,
+          hook_url: 'http://' + req.host + hookPort + req.path,
+          hook_verb: hook.verb,
+          media_url: hook.action.media_url,
+          hit_count: count,
+          last_hit: lastHitDate
+        });
+      }) 
+    }); 
   });
 };
 
