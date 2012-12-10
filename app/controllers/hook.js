@@ -7,8 +7,8 @@ var audioSail = "http://billcurtis.ca/public/sail.mp3";
 exports.get = function(req, res) {
   // Find the item and return it
   Hook.findOne({ key: req.params.id}, function(err, hook) {
-    if (err)   res.json(500, {'error': err.message})
-    if (!hook) res.json(404, {'error': 'Hook not found'}); 
+    if (err)   { res.json(500, {'error': err.message}); return; }
+    if (!hook) { res.json(404, {'error': 'Hook not found'}); return; } 
     res.json(hook);
   });
 };
@@ -21,8 +21,8 @@ exports.create = function(req, res) {
 
 exports.update = function(req, res) {
   Hook.findOne({ key: req.params.id}, function(err, hook) {
-    if (err)   res.json(500, {'error': err.message})
-    if (!hook) res.json(404, {'error': 'Hook not found'}); 
+    if (err)   { res.json(500, {'error': err.message}); return; }
+    if (!hook) { res.json(404, {'error': 'Hook not found'}); return; } 
 
     for (var key in req.body) {
       hook[key] = req.body[key];

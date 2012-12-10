@@ -5,6 +5,8 @@ function msgReceived(msg){
   } else if (msg.song) {
     // Function in hook.js
     playAudio(msg.song);
+  } else if (msg.hits) {
+    console.log('Hits: ' + msg.hits);
   }
 }
 

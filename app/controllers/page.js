@@ -48,8 +48,8 @@ exports.ping = function(req, res) {
 
 exports.post = function(req, res) {
   Hook.findOne({ key: req.params.id}, function(err, hook) {
-    if (err)   res.json(500, {'error': err.message})
-    if (!hook) res.json(404, {'error': 'Hook not found'}); 
+    if (err)   { res.json(500, {'error': err.message}); return; }
+    if (!hook) { res.json(404, {'error': 'Hook not found'}); return; } 
 
     hit = new Hit({
       '_hookId': hook._id,
@@ -58,8 +58,15 @@ exports.post = function(req, res) {
       'params': req.params
     });
 
-    hit.save();
-    io.sockets.json.send({song: audioSail});
+    hit.save(function (err, docs) {
+      Hit.count({_hookId: hook._id}, function(err, count) {
+        io.sockets.json.send({hits: count});
+        console.log('Total hits: ' + count);
+      });
+      // TODO: Change this to the real audio url
+      io.sockets.json.send({song: audioSail});
+    });
+    
     res.send(200);
   });
 };
