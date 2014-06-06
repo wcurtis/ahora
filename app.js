@@ -44,7 +44,7 @@ var audioSail = "/music/sail.mp3";
 var audioScapegoat = "/music/Shieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet.mp3";
 
 //js+css files
-app.get('/*.(js|css)', function(req, res){
+app.get('/*.(js|css|mp3)', function(req, res){
   res.sendfile("./public"+req.url);
 });
 
