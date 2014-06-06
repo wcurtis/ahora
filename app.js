@@ -40,8 +40,8 @@ pageSchema.methods.log = function () {
 }
 
 var Page = db.model('Page', pageSchema);
-var audioSail = "http://billcurtis.ca/public/sail.mp3";
-var audioScapegoat = "http://billcurtis.ca/public/Shieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet.mp3";
+var audioSail = "/music/sail.mp3";
+var audioScapegoat = "/music/Shieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet.mp3";
 
 //js+css files
 app.get('/*.(js|css)', function(req, res){
